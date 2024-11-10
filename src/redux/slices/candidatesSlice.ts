@@ -3,8 +3,8 @@ import {
   createAsyncThunk,
   createSlice,
 } from "@reduxjs/toolkit"
-import { DataStatus, candidatesState } from "../../../types/redux"
-import { ICandidate } from "../../../types/candidates"
+import { DataStatus, candidatesState } from "../../types/redux"
+import { ICandidate } from "../../types/candidates"
 
 const initialState: candidatesState = {
   error: null,

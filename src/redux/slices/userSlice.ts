@@ -3,8 +3,8 @@ import {
   createAsyncThunk,
   createSlice,
 } from "@reduxjs/toolkit"
-import { DataStatus, userState } from "../../../types/redux"
-import { IUser } from "../../../types/user"
+import { DataStatus, userState } from "../../types/redux"
+import { IUser } from "../../types/user"
 
 const initialState: userState = {
   error: null,
