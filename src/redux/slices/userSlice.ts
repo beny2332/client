@@ -19,7 +19,7 @@ export const fetchLogin = createAsyncThunk(
       const res = await fetch("http://localhost:1234/api/users/login", {
         method: "post",
         headers: {
-          "Content-Type": "aplication/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(user),
       })
