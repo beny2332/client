@@ -1,5 +1,5 @@
 export interface IUser extends Document {
-  id: string  
+  _id: string  
   username: string
   isAdmin: boolean
   hasVoted: boolean
