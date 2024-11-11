@@ -15,6 +15,12 @@ export default function Login() {
     navigate('/votes')
   }, [user])
 
+  useEffect(() =>{
+    if (user?._id) return
+    navigate('/votes')
+  }, [])
+  
+
   return (
     <div>
       <input

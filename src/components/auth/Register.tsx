@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import { useAppSelector } from "../../redux/store"
 
 export default function Register() {
-  return (
-    <div>Register</div>
-  )
+  const { user } = useAppSelector((state) => state.user)
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (user?._id) return
+    navigate("/votes")
+  }, [])
+  return <div>Register</div>
 }
