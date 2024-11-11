@@ -21,7 +21,8 @@ export const fetchCandidates = createAsyncThunk(
         thunkApi.rejectWithValue("Can't get the list, please try again")
       }
       const data = await res.json()
-      thunkApi.fulfillWithValue(data)
+      // thunkApi.fulfillWithValue(data)
+      return data
     } catch (err) {
       thunkApi.rejectWithValue("Can't get the list, please try again")
     }
