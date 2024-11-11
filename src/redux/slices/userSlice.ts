@@ -27,7 +27,8 @@ export const fetchLogin = createAsyncThunk(
         thunkApi.rejectWithValue("Can't login, please try again")
       }
       const data = await res.json()
-      // thunkApi.fulfillWithValue(data)
+      // thunkApi.fulfillWithValue(data);
+      localStorage.setItem("token", data.token)
       return data
     } catch (err) {
       thunkApi.rejectWithValue("Can't login, please try again")
@@ -35,7 +36,30 @@ export const fetchLogin = createAsyncThunk(
   }
 )
 
-const fetchRegister = createAsyncThunk(
+export const fetchProfileUpdate = createAsyncThunk(
+  "user/profile",
+  async (id: string, thunkApi) => {
+    try {
+      const res = await fetch("http://localhost:1234/api/users/profile", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage["token"]!,
+        },
+        body: JSON.stringify({ id }),
+      })
+      if (res.status != 200) {
+        thunkApi.rejectWithValue("Can't update profile, please try again")
+      }
+      const data = await res.json()
+      return data
+    } catch (err) {
+      thunkApi.rejectWithValue("Can't login, please try again")
+    }
+  }
+)
+
+export const fetchRegister = createAsyncThunk(
   "user/register",
   async (
     user: { username: string; password: string; isAdmin: boolean },
@@ -63,7 +87,11 @@ const fetchRegister = createAsyncThunk(
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.user = null
+    },
+  },
   extraReducers: (builder: ActionReducerMapBuilder<userState>) => {
     builder
       .addCase(fetchLogin.pending, (state, action) => {
@@ -80,6 +108,9 @@ const userSlice = createSlice({
         state.status = DataStatus.FAILED
         state.error = action.error as string
         state.user = null
+      })
+      .addCase(fetchProfileUpdate.fulfilled, (state, action) => {
+        state.user = { ...state.user, ...action.payload }
       })
   },
 })

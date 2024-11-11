@@ -13,18 +13,51 @@ const initialState: candidatesState = {
 }
 
 export const fetchCandidates = createAsyncThunk(
-  "candidates/",
+  "candidates/fetchCandidates",
   async (_, thunkApi) => {
     try {
-      const res = await fetch("http://localhost:1234/api/candidates/")
+      const token = localStorage.getItem('token')
+      if (!token) {
+        return thunkApi.rejectWithValue("No token found");
+      }
+      const res = await fetch("http://localhost:1234/api/candidates/", {
+        headers: {
+          "authorization": token,
+        },
+      })
       if (res.status != 200) {
         thunkApi.rejectWithValue("Can't get the list, please try again")
       }
       const data = await res.json()
-      // thunkApi.fulfillWithValue(data)
       return data
     } catch (err) {
       thunkApi.rejectWithValue("Can't get the list, please try again")
+    }
+  }
+)
+
+export const voteForCandidate = createAsyncThunk(
+  "candidates/voteForCandidate",
+  async (candidateId: string, thunkApi) => {
+    try {
+      const token = localStorage.getItem('token')
+      if (!token) {
+        return thunkApi.rejectWithValue("No token found");
+      }
+      const res = await fetch(`http://localhost:1234/api/candidates/vote/${candidateId}`, {
+        method: "post",
+        headers: {
+          "authorization": token,
+          "Content-Type": "application/json",
+        },
+      })
+      if (res.status != 200) {
+        thunkApi.rejectWithValue("Can't vote, please try again")
+      }
+      const data = await res.json()
+      return data
+    } catch (err) {
+      thunkApi.rejectWithValue("Can't vote, please try again")
     }
   }
 )

@@ -5,26 +5,21 @@ import { useNavigate } from "react-router-dom"
 
 export default function Login() {
   const dispatch = useAppDispatch()
-  const {user} = useAppSelector((state) => state.user)
+  const { user } = useAppSelector((state) => state.user)
   const navigate = useNavigate()
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
-  useEffect(() =>{
-    if (!user?._id) return
-    navigate('/votes')
-  }, [user])
-
-  useEffect(() =>{
-    if (user?._id) return
-    navigate('/votes')
-  }, [])
-  
+  useEffect(() => {
+    if (user?._id) {
+      navigate("/votes")
+    }
+  }, [user, navigate])
 
   return (
     <div>
       <input
-      name="inp-name-login"
+        name="inp-name-login"
         type="text"
         placeholder="User Name"
         value={username}
