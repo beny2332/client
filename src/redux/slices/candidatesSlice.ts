@@ -16,13 +16,13 @@ export const fetchCandidates = createAsyncThunk(
   "candidates/fetchCandidates",
   async (_, thunkApi) => {
     try {
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem("token")
       if (!token) {
-        return thunkApi.rejectWithValue("No token found");
+        return thunkApi.rejectWithValue("No token found")
       }
       const res = await fetch("http://localhost:1234/api/candidates/", {
         headers: {
-          "authorization": token,
+          authorization: token,
         },
       })
       if (res.status != 200) {
@@ -40,17 +40,20 @@ export const voteForCandidate = createAsyncThunk(
   "candidates/voteForCandidate",
   async (candidateId: string, thunkApi) => {
     try {
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem("token")
       if (!token) {
-        return thunkApi.rejectWithValue("No token found");
+        return thunkApi.rejectWithValue("No token found")
       }
-      const res = await fetch(`http://localhost:1234/api/candidates/vote/${candidateId}`, {
-        method: "post",
-        headers: {
-          "authorization": token,
-          "Content-Type": "application/json",
-        },
-      })
+      const res = await fetch(
+        `http://localhost:1234/api/candidates/vote/${candidateId}`,
+        {
+          method: "post",
+          headers: {
+            authorization: token,
+            "Content-Type": "application/json",
+          },
+        }
+      )
       if (res.status != 200) {
         thunkApi.rejectWithValue("Can't vote, please try again")
       }

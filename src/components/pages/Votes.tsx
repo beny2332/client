@@ -26,7 +26,7 @@ export default function Votes() {
     <div className="vote-list">
       {candidates.length &&
         candidates.map((candidate: ICandidate) => (
-          <VoteCard key={candidate._id} candidate={candidate}  />
+          <VoteCard key={candidate._id} candidate={candidate} />
         ))}
     </div>
   )

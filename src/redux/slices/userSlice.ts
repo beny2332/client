@@ -90,7 +90,7 @@ const userSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.user = null
-      localStorage.removeItem('token')
+      localStorage.removeItem("token")
     },
   },
   extraReducers: (builder: ActionReducerMapBuilder<userState>) => {

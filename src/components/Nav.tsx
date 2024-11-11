@@ -8,17 +8,19 @@ export default function Nav() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const handleLogout = () =>{
+  const handleLogout = () => {
     dispatch(userSlice.actions.logout())
     localStorage.removeItem("token")
-    navigate('/login')
+    navigate("/login")
   }
   return (
     <div className="nav">
       {user.user ? (
         <>
           <NavLink to={"/votes"}>Votes</NavLink>
-          {user.user.isAdmin && <NavLink to={"/statistics"}>Statistics</NavLink>}
+          {user.user.isAdmin && (
+            <NavLink to={"/statistics"}>Statistics</NavLink>
+          )}
           <button onClick={handleLogout}>Logout</button>
         </>
       ) : (

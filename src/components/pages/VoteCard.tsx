@@ -1,21 +1,25 @@
-import React from "react";
-import { ICandidate } from "../../types/candidates";
-import { useAppDispatch, useAppSelector } from "../../redux/store";
+import React from "react"
+import { ICandidate } from "../../types/candidates"
+import { useAppDispatch, useAppSelector } from "../../redux/store"
 import userSlice, {
   fetchLogin,
   fetchProfileUpdate,
-} from "../../redux/slices/userSlice";
-import { fetchCandidates } from "../../redux/slices/candidatesSlice";
+} from "../../redux/slices/userSlice"
+import { fetchCandidates } from "../../redux/slices/candidatesSlice"
 
 interface props {
-  candidate: ICandidate;
+  candidate: ICandidate
 }
 
 export default function VoteCard({ candidate }: props) {
-  const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch()
+  const { user } = useAppSelector((state) => state.user)
 
   const handleVote = async () => {
+    if (user?.hasVoted) {
+      alert("You have already voted.")
+      return
+    }
     try {
       const data = await fetch("http://localhost:1234/api/votes", {
         method: "post",
@@ -27,13 +31,13 @@ export default function VoteCard({ candidate }: props) {
           candidateId: candidate._id,
           userId: user?._id,
         }),
-      });
-      dispatch(fetchCandidates());
-      dispatch(fetchProfileUpdate(user?._id!));
+      })
+      dispatch(fetchCandidates())
+      dispatch(fetchProfileUpdate(user?._id!))
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   return (
     <div className="vote-card">
@@ -41,8 +45,12 @@ export default function VoteCard({ candidate }: props) {
         {candidate.name}
         <span className="badge">{candidate.votes}</span>
       </h1>
-        <img src={candidate.image} alt={candidate.name} />
-      <button onClick={handleVote}>VOTE</button>
+      <img src={candidate.image} alt={candidate.name} />
+      <button onClick={handleVote} disabled={user?.hasVoted}>
+        {user?.hasVoted
+          ? "You have already voted"
+          : `VOTE FOR ${candidate.name}`}
+      </button>
     </div>
-  );
+  )
 }
