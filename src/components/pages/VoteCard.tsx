@@ -21,7 +21,7 @@ export default function VoteCard({ candidate }: props) {
         method: "post",
         headers: {
           "Content-Type": "application/json",
-          Authorization: localStorage["Authorization"]!,
+          Authorization: localStorage["token"]!,
         },
         body: JSON.stringify({
           candidateId: candidate._id,

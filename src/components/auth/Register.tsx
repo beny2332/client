@@ -15,7 +15,7 @@ export default function Register() {
       fetchRegister({ username, password, isAdmin })
     )
     if (fetchRegister.fulfilled.match(resultAction)) {
-      navigate("/votes")
+      navigate("/login")
     } else {
       // Handle registration error if needed
       console.error(resultAction.payload)

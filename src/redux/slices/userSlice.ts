@@ -69,17 +69,17 @@ export const fetchRegister = createAsyncThunk(
       const res = await fetch("http://localhost:1234/api/users/register", {
         method: "post",
         headers: {
-          "Content-Type": "aplication/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(user),
       })
       if (res.status != 200) {
-        thunkApi.rejectWithValue("Can't create new user, please try again")
+        thunkApi.rejectWithValue("Can't register, please try again")
       }
       const data = await res.json()
-      thunkApi.fulfillWithValue(data)
+      return data
     } catch (err) {
-      thunkApi.rejectWithValue("Can't create new user, please try again")
+      thunkApi.rejectWithValue("Can't register, please try again")
     }
   }
 )
@@ -90,6 +90,7 @@ const userSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.user = null
+      localStorage.removeItem('token')
     },
   },
   extraReducers: (builder: ActionReducerMapBuilder<userState>) => {
