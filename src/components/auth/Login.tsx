@@ -17,7 +17,7 @@ export default function Login() {
   }, [user, navigate])
 
   return (
-    <div>
+    <div className="login">
       <input
         name="inp-name-login"
         type="text"

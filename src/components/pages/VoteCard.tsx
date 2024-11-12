@@ -1,11 +1,9 @@
 import React from "react"
 import { ICandidate } from "../../types/candidates"
 import { useAppDispatch, useAppSelector } from "../../redux/store"
-import userSlice, {
-  fetchLogin,
-  fetchProfileUpdate,
-} from "../../redux/slices/userSlice"
+import { fetchProfileUpdate } from "../../redux/slices/userSlice"
 import { fetchCandidates } from "../../redux/slices/candidatesSlice"
+import { socket } from "../../main"
 
 interface props {
   candidate: ICandidate
@@ -34,6 +32,7 @@ export default function VoteCard({ candidate }: props) {
       })
       dispatch(fetchCandidates())
       dispatch(fetchProfileUpdate(user?._id!))
+      socket.emit("newVote")
     } catch (err) {
       console.log(err)
     }
@@ -41,7 +40,7 @@ export default function VoteCard({ candidate }: props) {
 
   return (
     <div className="vote-card">
-      <h1>
+      <h1 className="label">
         {candidate.name}
         <span className="badge">{candidate.votes}</span>
       </h1>

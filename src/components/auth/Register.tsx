@@ -23,7 +23,7 @@ export default function Register() {
   }
 
   return (
-    <div>
+    <div className="register">
       <input
         name="inp-name-register"
         type="text"
