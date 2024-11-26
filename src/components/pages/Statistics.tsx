@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../redux/store"
 import { useNavigate } from "react-router-dom"
 import { fetchCandidates } from "../../redux/slices/candidatesSlice"
@@ -13,7 +13,6 @@ import {
   Legend,
 } from "chart.js"
 import { DataStatus } from "../../types/redux"
-import { color } from "chart.js/helpers"
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 

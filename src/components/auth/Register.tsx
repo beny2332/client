@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { useAppDispatch } from "../../redux/store"
 import { fetchRegister } from "../../redux/slices/userSlice"
 import { useNavigate } from "react-router-dom"

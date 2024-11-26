@@ -4,7 +4,6 @@ import {
   createSlice,
 } from "@reduxjs/toolkit"
 import { DataStatus, userState } from "../../types/redux"
-import { IUser } from "../../types/user"
 
 const initialState: userState = {
   error: null,
@@ -95,7 +94,7 @@ const userSlice = createSlice({
   },
   extraReducers: (builder: ActionReducerMapBuilder<userState>) => {
     builder
-      .addCase(fetchLogin.pending, (state, action) => {
+      .addCase(fetchLogin.pending, (state ) => {
         state.status = DataStatus.LOADING
         state.error = null
         state.user = null

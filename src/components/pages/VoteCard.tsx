@@ -1,4 +1,3 @@
-import React from "react"
 import { ICandidate } from "../../types/candidates"
 import { useAppDispatch, useAppSelector } from "../../redux/store"
 import { fetchProfileUpdate } from "../../redux/slices/userSlice"
@@ -19,7 +18,7 @@ export default function VoteCard({ candidate }: props) {
       return
     }
     try {
-      const data = await fetch("http://localhost:1234/api/votes", {
+      await fetch("http://localhost:1234/api/votes", {
         method: "post",
         headers: {
           "Content-Type": "application/json",

@@ -71,10 +71,10 @@ const candidatesSlice = createSlice({
   reducers: {},
   extraReducers: (builder: ActionReducerMapBuilder<candidatesState>) => {
     builder
-      .addCase(fetchCandidates.pending, (state, action) => {
+      .addCase(fetchCandidates.pending, (state) => {
         state.status = DataStatus.LOADING
         state.error = null
-        state.candidates = []
+        // state.candidates = []
       })
       .addCase(fetchCandidates.fulfilled, (state, action) => {
         state.status = DataStatus.SUCCSES
