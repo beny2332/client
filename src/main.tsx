@@ -7,7 +7,7 @@ import store from "./redux/store.ts"
 import { BrowserRouter } from "react-router-dom"
 import { io } from "socket.io-client"
 
-export const socket = io("http://localhost:1234")
+export const socket = io("https://elections-server.onrender.com")
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

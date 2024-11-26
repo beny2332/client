@@ -18,7 +18,7 @@ export default function VoteCard({ candidate }: props) {
       return
     }
     try {
-      await fetch("http://localhost:1234/api/votes", {
+      await fetch("https://elections-server.onrender.com/api/votes", {
         method: "post",
         headers: {
           "Content-Type": "application/json",

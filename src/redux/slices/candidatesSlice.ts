@@ -20,11 +20,14 @@ export const fetchCandidates = createAsyncThunk(
       if (!token) {
         return thunkApi.rejectWithValue("No token found")
       }
-      const res = await fetch("http://localhost:1234/api/candidates/", {
-        headers: {
-          authorization: token,
-        },
-      })
+      const res = await fetch(
+        "https://elections-server.onrender.com/api/candidates/",
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      )
       if (res.status != 200) {
         thunkApi.rejectWithValue("Can't get the list, please try again")
       }
@@ -45,7 +48,7 @@ export const voteForCandidate = createAsyncThunk(
         return thunkApi.rejectWithValue("No token found")
       }
       const res = await fetch(
-        `http://localhost:1234/api/candidates/vote/${candidateId}`,
+        `https://elections-server.onrender.com/api/candidates/vote/${candidateId}`,
         {
           method: "post",
           headers: {
