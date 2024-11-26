@@ -21,7 +21,7 @@ export const fetchCandidates = createAsyncThunk(
         return thunkApi.rejectWithValue("No token found")
       }
       const res = await fetch(
-        "https://elections-server.onrender.com/api/candidates/",
+        "https://elections-server.onrender.com/candidates/",
         {
           headers: {
             authorization: token,
@@ -48,7 +48,7 @@ export const voteForCandidate = createAsyncThunk(
         return thunkApi.rejectWithValue("No token found")
       }
       const res = await fetch(
-        `https://elections-server.onrender.com/api/candidates/vote/${candidateId}`,
+        `https://elections-server.onrender.com/candidates/vote/${candidateId}`,
         {
           method: "post",
           headers: {
