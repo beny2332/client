@@ -16,7 +16,7 @@ export const fetchLogin = createAsyncThunk(
   async (user: { username: string; password: string }, thunkApi) => {
     try {
       const res = await fetch(
-        "https://elections-server.onrender.com/users/login",
+        "https://elections-server.onrender.com/api/users/login",
         {
           method: "post",
           headers: {
@@ -43,7 +43,7 @@ export const fetchProfileUpdate = createAsyncThunk(
   async (id: string, thunkApi) => {
     try {
       const res = await fetch(
-        "https://elections-server.onrender.com/users/profile",
+        "https://elections-server.onrender.com/api/users/profile",
         {
           method: "post",
           headers: {
@@ -72,7 +72,7 @@ export const fetchRegister = createAsyncThunk(
   ) => {
     try {
       const res = await fetch(
-        "https://elections-server.onrender.com/users/register",
+        "https://elections-server.onrender.com/api/users/register",
         {
           method: "post",
           headers: {
